@@ -1,4 +1,4 @@
-var ELEMENT_ID = 'time'
+var ELEMENT_ID = 'temp'
 
 let newWindow;
 
@@ -17,7 +17,7 @@ function closeDataWindow() {
 
 function appendDataToWindow(time, value) {
   if (newWindow) {
-    newWindow.document.write('<tr><td>' + time + '</td>,<td>' + value + '</td></tr>');
+    newWindow.document.write('<tr><td>' + time + ',</td><td>' + value + '</td></tr>');
   }
 }
 
