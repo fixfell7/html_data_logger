@@ -31,7 +31,7 @@ function monitorData() {
     appendDataToWindow(currentTime, value);
   }
   else {
-    console.log("elemet ID " + ELEMENT_ID + " not found")
+    console.log("element ID " + ELEMENT_ID + " not found")
   }
 }
 
