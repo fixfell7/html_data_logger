@@ -17,23 +17,34 @@ function appendDataToWindow(time, value) {
 function monitorData() {
   const element = document.getElementById(ELEMENT_ID);
   if (element) {
-    
-    let date = new Date();
-    let hours = 	("0" + date.getHours()).slice (-2);
-    let minutes = 	("0" + date.getMinutes()).slice (-2);
-    let seconds = 	("0" + date.getSeconds()).slice (-2);
-    const currentTime = hours + ':' + minutes + ':' + seconds
-    //console.log("currentTime: " + currentTime)
-    
+  
+	let date = new Date();
+	let hours = 	("0" + date.getHours()).slice (-2);
+	let minutes = 	("0" + date.getMinutes()).slice (-2);
+	let seconds = 	("0" + date.getSeconds()).slice (-2);
+	const currentTime = hours + ':' + minutes + ':' + seconds
+	//console.log("currentTime: " + currentTime)
+	
     var value = element.innerText;
-    value = value.replace(/\./g, ',');
-    value = value.replace(/[^0-9,]/g, '');
+	value = value.replace(/\./g, ',');
+	value = value.replace(/[^0-9,]/g, '');
     appendDataToWindow(currentTime, value);
   }
   else {
-    console.log("element ID " + ELEMENT_ID + " not found")
+	console.log("element ID " + ELEMENT_ID + " not found")
   }
 }
 
+var LastTime = 0;	//set var once
+function CheckTime() {
+	let date = new Date();
+	let seconds = date.getSeconds();
+	if (seconds > LastTime) {
+		monitorData();
+	}
+	LastTime = seconds
+}
+
+//setInterval(monitorData, 1000);		//not perfect, skip seconds sometimes
+setInterval(LastTime, 100);					//detect date.seconds change at an 0,1s interval
 openDataWindow();
-setInterval(monitorData, 1000);
