@@ -45,8 +45,8 @@ function monitorData() {
 		var value_2 = element2.innerText;
 		appendDataToWindow(currentTime, value, value_2);
 		arrVal2.push(value_2)
-		if (arrVal2.length > 10) {
-			arrVal2.slice(arrVal2, 1)
+		if (arrVal2.length > 15) {
+			arrVal2 = arrVal2.slice(1)
 		}
 
 		
@@ -95,7 +95,3 @@ div.style.justifyContent = "center";
 newWindow.document.body.appendChild(div);
 
 var divPointer = newWindow.document.getElementById("Front_screen")
-
-
-
-
