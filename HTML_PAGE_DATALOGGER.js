@@ -46,5 +46,5 @@ function CheckTime() {
 }
 
 //setInterval(monitorData, 1000);		//not perfect, skip seconds sometimes
-setInterval(LastTime, 100);					//detect date.seconds change at an 0,1s interval
+setInterval(CheckTime, 100);					//detect date.seconds change at an 0,1s interval
 openDataWindow();
