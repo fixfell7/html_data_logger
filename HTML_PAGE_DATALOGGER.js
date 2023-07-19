@@ -38,7 +38,7 @@ function monitorData() {
 	if (element2 == undefined) {
     	appendDataToWindow(currentTime, value);
 	} else {
-		var value_2 = elemen2.innerText;
+		var value_2 = element2.innerText;
 		appendDataToWindow(currentTime, value, value_2);
 	}
   }
