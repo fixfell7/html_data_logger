@@ -1,4 +1,5 @@
 var ELEMENT_ID = 'temp'
+var ELEMENT_ID_2 = 'uptime'
 
 let newWindow;
 
@@ -8,14 +9,19 @@ function openDataWindow() {
   newWindow.document.write('<tr><td>Time</td><td>Temperature</td></tr>');
 }
 
-function appendDataToWindow(time, value) {
+function appendDataToWindow(time, value, value_2 = undefined) {
   if (newWindow) {
-    newWindow.document.write('<tr><td>' + time + '</td><td>' + value + '</td></tr>');
+    if (value_2 == undefined) {
+		newWindow.document.write('<tr><td>' + time + '</td><td>' + value + '</td></tr>');
+	} else {
+		newWindow.document.write('<tr><td>' + time + '</td><td>' + value + '</td><td>' + value_2 + '</td></tr>');
+	}
   }
 }
 
 function monitorData() {
   const element = document.getElementById(ELEMENT_ID);
+  const element2 = document.getElementById(ELEMENT_ID_2);
   if (element) {
   
 	let date = new Date();
@@ -28,7 +34,13 @@ function monitorData() {
     var value = element.innerText;
 	value = value.replace(/\./g, ',');
 	value = value.replace(/[^0-9,]/g, '');
-    appendDataToWindow(currentTime, value);
+
+	if (element2 == undefined) {
+    	appendDataToWindow(currentTime, value);
+	} else {
+		var value_2 = element2.innerText;
+		appendDataToWindow(currentTime, value, value_2);
+	}
   }
   else {
 	console.log("element ID " + ELEMENT_ID + " not found")
