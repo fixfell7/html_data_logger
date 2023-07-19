@@ -1,3 +1,24 @@
+var DataLog = [		//The dictionnary for value you want to get
+	{
+		enable : true,
+		type : "id",			//Possible value: (element, id, class)
+		value : "temp",			//The element in the html you want to
+		name : "Température",	//The name showed in the data page
+		enable_check_update : false,	//Check if the value is stalled
+		check_update_interval : 0,	//How many interval until stall alert
+	},
+	{
+		enable : true,
+		type : "id",
+		value : "uptime",
+		name : "Temps Logiciel",
+		enable_check_update : true,
+		check_update_interval : 10,
+	},
+]
+
+
+
 var ELEMENT_ID = 'temp'
 var ELEMENT_ID_2 = 'uptime'
 
