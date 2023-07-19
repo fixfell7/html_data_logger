@@ -3,6 +3,9 @@ var ELEMENT_ID_2 = 'uptime'
 
 let newWindow;
 
+var arrVal2 = [];
+const allEqual = arr => arr.every(val => val === arr[0]);
+
 function openDataWindow() {
   newWindow = window.open('', '_blank');
   newWindow.document.write('<html><head><title>Data Logger: ' + ELEMENT_ID + '</title></head></html><table>');
@@ -41,9 +44,18 @@ function monitorData() {
 	} else {
 		var value_2 = element2.innerText;
 		appendDataToWindow(currentTime, value, value_2);
-	}
+		arrVal2.push(value_2)
+		if (arrVal2.length > 10) {
+			arrVal2.slice(arrVal2, 1)
+		}
 
-	
+		
+		if (allEqual(arrVal2)) {
+			div.style.backgroundColor = "rgba(255, 0, 0, 0.3)";
+		} else {
+			div.style.backgroundColor = "rgba(0, 0, 0, 0.2)";
+		}
+	}
   }
   else {
 	console.log("element ID " + ELEMENT_ID + " not found")
@@ -83,3 +95,7 @@ div.style.justifyContent = "center";
 newWindow.document.body.appendChild(div);
 
 var divPointer = newWindow.document.getElementById("Front_screen")
+
+
+
+
