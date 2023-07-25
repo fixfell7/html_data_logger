@@ -3,6 +3,9 @@ var ELEMENT_ID_2 = 'uptime'
 
 let newWindow;
 
+var arrVal2 = [];
+const allEqual = arr => arr.every(val => val === arr[0]);
+
 function openDataWindow() {
   newWindow = window.open('', '_blank');
   newWindow.document.write('<html><head><title>Data Logger: ' + ELEMENT_ID + '</title></head></html><table>');
@@ -16,6 +19,7 @@ function appendDataToWindow(time, value, value_2 = undefined) {
 	} else {
 		newWindow.document.write('<tr><td>' + time + '</td><td>' + value + '</td><td>' + value_2 + '</td></tr>');
 	}
+	divPointer.innerHTML = "Time : " + time + "<br>Value : " + value + "<br>Value 2 : " + value_2
   }
 }
 
@@ -40,6 +44,17 @@ function monitorData() {
 	} else {
 		var value_2 = element2.innerText;
 		appendDataToWindow(currentTime, value, value_2);
+		arrVal2.push(value_2)
+		if (arrVal2.length > 15) {
+			arrVal2 = arrVal2.slice(1)
+		}
+
+		
+		if (allEqual(arrVal2)) {
+			div.style.backgroundColor = "rgba(255, 0, 0, 0.3)";
+		} else {
+			div.style.backgroundColor = "rgba(0, 0, 0, 0.2)";
+		}
 	}
   }
   else {
@@ -57,6 +72,26 @@ function CheckTime() {
 	LastTime = seconds
 }
 
+openDataWindow();
+
 //setInterval(monitorData, 1000);		//not perfect, skip seconds sometimes
 setInterval(CheckTime, 100);					//detect date.seconds change at an 0,1s interval
-openDataWindow();
+
+var div = document.createElement("div");
+div.id = "Front_screen"
+div.style.width = "20%";
+div.style.height = "10%";
+div.style.borderRadius = "1em";
+div.style.backgroundColor = "rgba(0, 0, 0, 0.2)";
+div.style.color = "black";
+div.style.position = "absolute";
+div.style.top = "50%";
+div.style.left = "50%";
+div.style.transform = "translate(-50%, -50%)";
+div.innerHTML = "";
+div.style.display = "flex";
+div.style.alignItems = "center";
+div.style.justifyContent = "center";
+newWindow.document.body.appendChild(div);
+
+var divPointer = newWindow.document.getElementById("Front_screen")
